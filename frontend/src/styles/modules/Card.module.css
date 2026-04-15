@@ -1,0 +1,198 @@
+/* Card Module Styles */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Stat Card */
+.statCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.statCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.statHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIcon.blue {
+  background-color: #3b82f6;
+}
+
+.statIcon.green {
+  background-color: #10b981;
+}
+
+.statIcon.purple {
+  background-color: #8b5cf6;
+}
+
+.statIcon.red {
+  background-color: #ef4444;
+}
+
+.statIcon.yellow {
+  background-color: #f59e0b;
+}
+
+.statIcon svg {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+}
+
+.statBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.statBadge.positive {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.statBadge.negative {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.statBadge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  line-height: 1.1;
+}
+
+.statLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.statDescription {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Activity Card */
+.activityCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.activityCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.activityHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.activityHeader h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.activityHeader svg {
+  width: 20px;
+  height: 20px;
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+/* Quick Action Card */
+.quickActionCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.quickActionCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.quickActionHeader {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .statCard {
+    padding: 16px;
+  }
+  
+  .statValue {
+    font-size: 24px;
+  }
+  
+  .statIcon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .statIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
