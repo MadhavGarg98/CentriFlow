@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import styles from '../../styles/modules/Dashboard.module.css'
+import styles from '../../styles/modules/PremiumLayout.module.css'
 
 const Layout = ({ children, user }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -11,12 +11,12 @@ const Layout = ({ children, user }) => {
   }
 
   return (
-    <div className={styles.dashboard}>
+    <div className={styles.layout}>
       <Sidebar user={user} isOpen={sidebarOpen} onToggle={toggleSidebar} />
       
       <main className={styles.mainContent}>
         <Navbar user={user} />
-        <div style={{ marginTop: '24px' }}>
+        <div className={styles.contentWrapper}>
           {children}
         </div>
       </main>

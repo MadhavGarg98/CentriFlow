@@ -43,17 +43,9 @@ api.interceptors.response.use(
 export const authAPI = {
   login: (credentials) => api.post('/auth/login', credentials),
   register: (userData) => {
-    const formData = new FormData()
-    Object.keys(userData).forEach(key => {
-      if (userData[key] !== null && userData[key] !== undefined) {
-        formData.append(key, userData[key])
-      }
-    })
-    return api.post('/auth/register', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    // Remove confirmPassword before sending to backend
+    const { confirmPassword, ...registerData } = userData
+    return api.post('/auth/register', registerData)
   },
   getCurrentUser: () => api.get('/auth/me'),
   updateProfile: (userData) => {
@@ -77,7 +69,7 @@ export const usersAPI = {
   getUserById: (id) => api.get(`/users/${id}`),
   updateUser: (id, userData) => api.put(`/users/${id}`, userData),
   deleteUser: (id) => api.delete(`/users/${id}`),
-  getStudents: (params) => api.get('/students/list', { params }),
+  getStudents: (params) => api.get('/users/students/list', { params }),
   updateFaceData: (faceData) => api.put('/face-data', { faceData }),
 }
 

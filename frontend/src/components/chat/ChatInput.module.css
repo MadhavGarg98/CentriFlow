@@ -1,0 +1,125 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  position: sticky;
+  bottom: 0;
+}
+
+.inputWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #f8fafc;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  line-height: 1.4;
+}
+
+.input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+.sendButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sendButton:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.sendButton:active {
+  transform: scale(0.95);
+}
+
+.sendButton:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sendIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.attachButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.attachButton:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+}
+
+.attachIcon {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .input {
+    min-height: 40px;
+    padding: 10px 14px;
+  }
+  
+  .sendButton,
+  .attachButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sendIcon,
+  .attachIcon {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -11,7 +11,7 @@ import {
   FiMenu,
   FiX
 } from 'react-icons/fi'
-import styles from '../../styles/modules/Sidebar.module.css'
+import styles from '../../styles/modules/PremiumSidebar.module.css'
 
 const Sidebar = ({ user, isOpen, onToggle }) => {
   const location = useLocation()
@@ -51,13 +51,11 @@ const Sidebar = ({ user, isOpen, onToggle }) => {
         <div className={styles.sidebarHeader}>
           <div className={styles.logo}>
             <div className={styles.logoIcon}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
+              CF
             </div>
-            <div className={styles.logoText}>
-              <h1>CentriFlow</h1>
-              <span>{user?.role} Portal</span>
+            <div>
+              <div className={styles.logoText}>CentriFlow</div>
+              <div className={styles.logoSubtext}>{user?.role} Portal</div>
             </div>
           </div>
         </div>
@@ -65,19 +63,26 @@ const Sidebar = ({ user, isOpen, onToggle }) => {
         {/* Navigation */}
         <nav className={styles.sidebarNav}>
           <div className={styles.navSection}>
-            {filteredNavItems.map((item) => {
-              const isActive = location.pathname === item.path
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`${styles.navItem} ${isActive ? styles.active : ''}`}
-                >
-                  <item.icon className={styles.navIcon} />
-                  {item.label}
-                </Link>
-              )
-            })}
+            <div className={styles.navSectionTitle}>Main</div>
+            <ul className={styles.navList}>
+              {filteredNavItems.map((item) => {
+                const isActive = location.pathname === item.path
+                return (
+                  <li key={item.path} className={styles.navItem}>
+                    <Link
+                      to={item.path}
+                      className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+                    >
+                      <item.icon className={styles.navIcon} />
+                      <span className={styles.navText}>{item.label}</span>
+                      {item.label === 'Chat' && (
+                        <span className={styles.navBadge}>3</span>
+                      )}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
         </nav>
 
@@ -89,14 +94,10 @@ const Sidebar = ({ user, isOpen, onToggle }) => {
             </div>
             <div className={styles.userInfo}>
               <div className={styles.userName}>{user?.name}</div>
-              <div className={styles.userEmail}>{user?.email}</div>
+              <div className={styles.userRole}>{user?.role}</div>
             </div>
+            <FiSettings className={styles.userMenu} />
           </div>
-          
-          <button className={styles.logoutButton} onClick={handleLogout}>
-            <FiLogOut className={styles.navIcon} />
-            Logout
-          </button>
         </div>
       </aside>
     </>

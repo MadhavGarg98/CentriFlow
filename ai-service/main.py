@@ -9,7 +9,7 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 import cv2
-import face_recognition
+# import face_recognition  # Temporarily commented out
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 import requests
@@ -304,102 +304,102 @@ async def chat_with_ai(request: ChatRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Chat service failed: {str(e)}")
 
-@app.post("/face-recognition", response_model=FaceRecognitionResponse)
-async def recognize_face(request: FaceRecognitionRequest):
-    """Face recognition for attendance system"""
-    try:
-        # Decode base64 image
-        image_data = base64.b64decode(request.image)
-        image = Image.open(BytesIO(image_data))
-        
-        # Convert to OpenCV format
-        opencv_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-        
-        # Find face locations
-        face_locations = face_recognition.face_locations(opencv_image)
-        
-        if not face_locations:
-            return FaceRecognitionResponse(
-                success=False,
-                message="No face detected in the image"
-            )
-        
-        # Get face encodings
-        face_encodings = face_recognition.face_encodings(opencv_image, face_locations)
-        
-        if not face_encodings:
-            return FaceRecognitionResponse(
-                success=False,
-                message="Could not encode face features"
-            )
-        
-        # For demo purposes, return a mock student
-        # In production, compare with known faces database
-        mock_student = {
-            "_id": "64a1b2c3d4e5f6789012345",
-            "name": "Demo Student",
-            "email": "demo@centriflow.com",
-            "confidence": 95.5
-        }
-        
-        return FaceRecognitionResponse(
-            success=True,
-            student=mock_student,
-            confidence=95.5,
-            message="Face recognized successfully"
-        )
-    
-    except Exception as e:
-        return FaceRecognitionResponse(
-            success=False,
-            message=f"Face recognition failed: {str(e)}"
-        )
+# @app.post("/face-recognition", response_model=FaceRecognitionResponse)
+# async def recognize_face(request: FaceRecognitionRequest):
+#     """Face recognition for attendance system"""
+#     try:
+#         # Decode base64 image
+#         image_data = base64.b64decode(request.image)
+#         image = Image.open(BytesIO(image_data))
+#         
+#         # Convert to OpenCV format
+#         opencv_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+#         
+#         # Find face locations
+#         face_locations = face_recognition.face_locations(opencv_image)
+#         
+#         if not face_locations:
+#             return FaceRecognitionResponse(
+#                 success=False,
+#                 message="No face detected in the image"
+#             )
+#         
+#         # Get face encodings
+#         face_encodings = face_recognition.face_encodings(opencv_image, face_locations)
+#         
+#         if not face_encodings:
+#             return FaceRecognitionResponse(
+#                 success=False,
+#                 message="Could not encode face features"
+#             )
+#         
+#         # For demo purposes, return a mock student
+#         # In production, compare with known faces database
+#         mock_student = {
+#             "_id": "64a1b2c3d4e5f6789012345",
+#             "name": "Demo Student",
+#             "email": "demo@centriflow.com",
+#             "confidence": 95.5
+#         }
+#         
+#         return FaceRecognitionResponse(
+#             success=True,
+#             student=mock_student,
+#             confidence=95.5,
+#             message="Face recognized successfully"
+#         )
+#     
+#     except Exception as e:
+#         return FaceRecognitionResponse(
+#             success=False,
+#             message=f"Face recognition failed: {str(e)}"
+#         )
 
-@app.post("/register-face")
-async def register_face(
-    student_id: str,
-    image: UploadFile = File(...)
-):
-    """Register a student's face for recognition"""
-    try:
-        # Read image
-        image_data = await image.read()
-        
-        # Process image and extract face encoding
-        image_pil = Image.open(BytesIO(image_data))
-        opencv_image = cv2.cvtColor(np.array(image_pil), cv2.COLOR_RGB2BGR)
-        
-        # Find face locations
-        face_locations = face_recognition.face_locations(opencv_image)
-        
-        if not face_locations:
-            raise HTTPException(status_code=400, detail="No face detected in the image")
-        
-        if len(face_locations) > 1:
-            raise HTTPException(status_code=400, detail="Multiple faces detected. Please provide an image with only one face.")
-        
-        # Get face encoding
-        face_encodings = face_recognition.face_encodings(opencv_image, face_locations)
-        
-        if not face_encodings:
-            raise HTTPException(status_code=400, detail="Could not extract face features")
-        
-        # Store face encoding (in production, use database)
-        known_faces[student_id] = {
-            "encoding": face_encodings[0].tolist(),
-            "registered_at": "2024-01-01T00:00:00Z"
-        }
-        
-        return {
-            "success": True,
-            "message": "Face registered successfully",
-            "student_id": student_id
-        }
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Face registration failed: {str(e)}")
+# @app.post("/register-face")
+# async def register_face(
+#     student_id: str,
+#     image: UploadFile = File(...)
+# ):
+#     """Register a student's face for recognition"""
+#     try:
+#         # Read image
+#         image_data = await image.read()
+#         
+#         # Process image and extract face encoding
+#         image_pil = Image.open(BytesIO(image_data))
+#         opencv_image = cv2.cvtColor(np.array(image_pil), cv2.COLOR_RGB2BGR)
+#         
+#         # Find face locations
+#         face_locations = face_recognition.face_locations(opencv_image)
+#         
+#         if not face_locations:
+#             raise HTTPException(status_code=400, detail="No face detected in the image")
+#         
+#         if len(face_locations) > 1:
+#             raise HTTPException(status_code=400, detail="Multiple faces detected. Please provide an image with only one face.")
+#         
+#         # Get face encoding
+#         face_encodings = face_recognition.face_encodings(opencv_image, face_locations)
+#         
+#         if not face_encodings:
+#             raise HTTPException(status_code=400, detail="Could not extract face features")
+#         
+#         # Store face encoding (in production, use database)
+#         known_faces[student_id] = {
+#             "encoding": face_encodings[0].tolist(),
+#             "registered_at": "2024-01-01T00:00:00Z"
+#         }
+#         
+#         return {
+#             "success": True,
+#             "message": "Face registered successfully",
+#             "student_id": student_id
+#         }
+#     
+#     except HTTPException:
+#         raise
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Face registration failed: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

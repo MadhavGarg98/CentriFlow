@@ -31,6 +31,20 @@ const upload = multer({
 // Upload image to Cloudinary
 const uploadImage = async (file, folder = 'centriflow') => {
   try {
+    // Check if Cloudinary is properly configured
+    if (!process.env.CLOUDINARY_CLOUD_NAME || 
+        process.env.CLOUDINARY_CLOUD_NAME === 'your-cloudinary-name' ||
+        !process.env.CLOUDINARY_API_KEY ||
+        process.env.CLOUDINARY_API_KEY === 'your-cloudinary-key' ||
+        !process.env.CLOUDINARY_API_SECRET ||
+        process.env.CLOUDINARY_API_SECRET === 'your-cloudinary-secret') {
+      console.log('Cloudinary not configured, skipping image upload');
+      return {
+        url: '',
+        public_id: ''
+      };
+    }
+
     const result = await cloudinary.uploader.upload(file, {
       folder,
       resource_type: 'image',
@@ -45,7 +59,11 @@ const uploadImage = async (file, folder = 'centriflow') => {
       public_id: result.public_id
     };
   } catch (error) {
-    throw new Error('Failed to upload image to Cloudinary');
+    console.log('Failed to upload image to Cloudinary, continuing without image:', error.message);
+    return {
+      url: '',
+      public_id: ''
+    };
   }
 };
 

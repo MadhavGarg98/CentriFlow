@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { FiSearch, FiBell, FiUser, FiSettings, FiLogOut } from 'react-icons/fi'
-import styles from '../../styles/modules/Navbar.module.css'
+import styles from '../../styles/modules/PremiumNavbar.module.css'
 
 const Navbar = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)

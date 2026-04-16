@@ -16,7 +16,7 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
-  const { signup } = useAuth()
+  const { register } = useAuth()
   const navigate = useNavigate()
 
   const getPasswordStrength = (password) => {
@@ -94,7 +94,7 @@ const Signup = () => {
     
     setLoading(true)
     try {
-      const result = await signup(formData)
+      const result = await register(formData)
       if (result.success) {
         navigate('/dashboard')
       }
